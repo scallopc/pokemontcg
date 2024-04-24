@@ -1,0 +1,117 @@
+<app-layout>
+  <span class="flex justify-center items-center h-full" *ngIf="loading">
+    <app-pokemon-loading></app-pokemon-loading>
+  </span>
+
+  <div
+    class="h-full transition-opacity duration-500 ease-in-out"
+    *ngIf="!loading"
+  >
+    <!-- <app-header
+      [buttonName]="'Adicionar mais cartas'"
+      (buttonAction)="AddNewCards()"
+    ></app-header> -->
+    <div class="mb-5">
+      <button igxButton="outlined" igxRipple (click)="goBack()">
+        <igx-icon family="material">arrow_back</igx-icon>Voltar
+      </button>
+    </div>
+
+    <div class="h-full flex flex-col gap-5 overflow-auto">
+      <div class="flex justify-between w-full items-center">
+        <div class="flex gap-2 items-center" *ngIf="!showInput">
+          <div class="text-xl font-semibold">
+            {{ deckName }}
+          </div>
+          <igx-icon
+            #target="tooltipTarget"
+            [igxTooltipTarget]="tooltipRef"
+            class="cursor-pointer"
+            family="material"
+            (click)="openForm()"
+            >edit</igx-icon
+          >
+          <div #tooltipRef="tooltip" igxTooltip>Editar</div>
+        </div>
+
+        <div class="flex gap-2 items-center" *ngIf="showInput">
+          <igx-input-group>
+            <input
+              igxInput
+              name="fullName"
+              type="text"
+              required="required"
+              [(ngModel)]="deckName"
+              (ngModelChange)="onNameDeckChange()"
+            />
+            <label igxLabel for="fullName">Nome do baralho</label>
+            <igx-icon
+              #target="tooltipTarget"
+              [igxTooltipTarget]="tooltipSaveRef"
+              igxSuffix
+              class="cursor-pointer"
+              family="material"
+              (click)="edit()"
+              >save</igx-icon
+            >
+            <igx-icon
+              #target="tooltipTarget"
+              [igxTooltipTarget]="tooltipCloseRef"
+              igxSuffix
+              class="cursor-pointer"
+              family="material"
+              (click)="closeForm()"
+              >close</igx-icon
+            >
+          </igx-input-group>
+          <div #tooltipSaveRef="tooltip" igxTooltip>Salvar</div>
+          <div #tooltipCloseRef="tooltip" igxTooltip>Cancelar</div>
+        </div>
+        <div class="flex gap-2">
+          <!--  <button
+            igxButton="contained"
+            (click)="AddNewCards()"
+          >
+            Adicionar mais cartas
+          </button> -->
+          <button igxButton="contained" (click)="deleteDeck()">Deletar</button>
+        </div>
+      </div>
+      <div class="flex gap-2 flex-wrap">
+        <span class="font-semibold">Cartas Pokémons: {{ pokemons }}</span>
+        <div class="border-solid border-gray-100 border-2"></div>
+        <span class="font-semibold">Cartas Treinador: {{ trainer }}</span>
+        <div class="border-solid border-gray-100 border-2"></div>
+        <span class="font-semibold"
+          >Tipos de pokémons: {{ quantityTypes }}</span
+        >
+      </div>
+
+      <div class="grow">
+        <div class="container-card-list" *ngIf="data.cards">
+          <div *ngFor="let card of data.cards" class="flex flex-col gap-2">
+            <img
+              [src]="card?.images?.small"
+              class="cursor-pointer"
+              (click)="openCardDetail(card)"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-layout>
+
+<app-card-detail
+  [cardItem]="itemDetail"
+  *ngIf="openDetail"
+  [openModalDetail]="openDetail"
+  (closeModalDetailEvent)="closeCardDetail()"
+></app-card-detail>
+
+<igx-dialog
+  #dialogSuccess
+  message="Baralho atualizado com sucesso!"
+  leftButtonLabel="OK"
+>
+</igx-dialog>

@@ -1,27 +1,26 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { DisplayDensity } from 'igniteui-angular';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-card-detail',
   templateUrl: './card-detail.component.html',
-  styleUrls: ['./card-detail.component.scss']
+  styleUrls: ['./card-detail.component.scss'],
 })
 export class CardDetailComponent implements OnInit {
   @Input() cardItem: any;
+  @Input() buttonName?: string = '';
   @Input() openModalDetail: boolean = false;
   @Output() closeModalDetailEvent = new EventEmitter<void>();
+  @Output() action = new EventEmitter<any>();
 
   constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   close() {
     this.closeModalDetailEvent.emit();
   }
 
-  preventClose(event: Event) {
-    event.stopPropagation();
+  addCard(card) {
+    this.action.emit(card); // Emita o evento de adicionar um novo card
   }
-
 }

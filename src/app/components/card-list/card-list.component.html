@@ -1,0 +1,54 @@
+  <span class="flex justify-center items-center h-full" *ngIf="loading">
+    <app-pokemon-loading></app-pokemon-loading>
+  </span>
+
+  <div class="flex flex-col gap-3 overflow-auto h-full" *ngIf="!loading">
+    <div class="container-card-list">
+      <div *ngFor="let item of cards" class="flex flex-col gap-2">
+        <img
+          [src]="item.images.small"
+          class="cursor-pointer"
+          (click)="openCardDetail(item)"
+        />
+        <div class="w-full">
+          <button
+            igxButton="contained"
+            igxRipple
+            style="width: 100%"
+            (click)="add(item)"
+          >
+            <igx-icon family="material">add</igx-icon> Adicionar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex gap-3 w-full justify-between py-2.5">
+      <span>{{ cards.length }} itens por página</span>
+
+      <div class="flex gap-3 items-center">
+        <div igxIconButton="outlined" igxRipple class="medium">
+          <igx-icon (click)="onBackPageChanged()">
+            keyboard_arrow_left
+          </igx-icon>
+        </div>
+        <span>{{ page }} de {{ totalCount }}</span>
+        <div igxIconButton="outlined" igxRipple class="medium">
+          <igx-icon (click)="onNextPageChanged()">
+            keyboard_arrow_right
+          </igx-icon>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+ <app-card-detail
+ [buttonName]="'Adicionar'"
+  [cardItem]="itemDetail"
+  *ngIf="openDetail"
+  [openModalDetail]="openDetail"
+  (closeModalDetailEvent)="closeCardDetail()"
+  (action)="add($event)"
+></app-card-detail>
+

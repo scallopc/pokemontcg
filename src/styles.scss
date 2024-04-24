@@ -1,10 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-@import "../node_modules/igniteui-angular/styles/igniteui-angular.css";
-@import "../node_modules/igniteui-angular/styles/igniteui-indigo-light.css";
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-
 
 
 html,
@@ -13,40 +10,33 @@ body {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: "arial", heletica, sans-serif;
+	font-size: 14px;
+	font-family: "Poppins", sans-serif;
 }
 
-@-webkit-keyframes animate {
-	from {
-		background-position: 0 0;
-	}
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #4051b5 #ffffff;
+  }
 
-	to {
-		background-position: 500px 0;
-	}
-}
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 8px;
+  }
 
+  *::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #4051b5;
+    border-radius: 50px;
+    border: 3px none #ffffff;
+  }
+  
 @-moz-keyframes animate {
-	from {
-		background-position: 0 0;
-	}
-
-	to {
-		background-position: 500px 0;
-	}
-}
-
-@-ms-keyframes animate {
-	from {
-		background-position: 0 0;
-	}
-
-	to {
-		background-position: 500px 0;
-	}
-}
-
-@-o-keyframes animate {
 	from {
 		background-position: 0 0;
 	}

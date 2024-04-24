@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DisplayDensity } from 'igniteui-angular';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +7,6 @@ import { DisplayDensity } from 'igniteui-angular';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-   density: DisplayDensity = 'comfortable';
 
   constructor(private router: Router) { }
 

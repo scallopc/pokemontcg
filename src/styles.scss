@@ -1,10 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-@import "../node_modules/igniteui-angular/styles/igniteui-angular.css";
-@import "../node_modules/igniteui-angular/styles/igniteui-indigo-light.css";
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-
 
 
 html,
@@ -13,40 +10,11 @@ body {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: "arial", heletica, sans-serif;
+	font-size: 14px;
+	font-family: "Poppins", sans-serif;
 }
-
-@-webkit-keyframes animate {
-	from {
-		background-position: 0 0;
-	}
-
-	to {
-		background-position: 500px 0;
-	}
-}
-
+  
 @-moz-keyframes animate {
-	from {
-		background-position: 0 0;
-	}
-
-	to {
-		background-position: 500px 0;
-	}
-}
-
-@-ms-keyframes animate {
-	from {
-		background-position: 0 0;
-	}
-
-	to {
-		background-position: 500px 0;
-	}
-}
-
-@-o-keyframes animate {
 	from {
 		background-position: 0 0;
 	}
@@ -65,3 +33,41 @@ body {
 		background-position: 500px 0;
 	}
 }
+
+/* Firefox (uncomment to work in Firefox, although other properties will not work!)  */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #4C72B6 #DFE9EB;
+}
+
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+	height: 6px;
+	width: 6px;
+  }
+  *::-webkit-scrollbar-track {
+	border-radius: 5px;
+	background-color: #DFE9EB;
+  }
+  
+  *::-webkit-scrollbar-track:hover {
+	background-color: #B8C0C2;
+  }
+  
+  *::-webkit-scrollbar-track:active {
+	background-color: #B8C0C2;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+	border-radius: 5px;
+	background-color: #4C72B6;
+  }
+  
+  *::-webkit-scrollbar-thumb:hover {
+	background-color: #375384;
+  }
+  
+  *::-webkit-scrollbar-thumb:active {
+	background-color: #212189;
+  }
+  

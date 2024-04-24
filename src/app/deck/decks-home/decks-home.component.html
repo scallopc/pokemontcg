@@ -1,0 +1,10 @@
+<app-layout>
+  <span class="flex justify-center items-center h-full" *ngIf="loading">
+    <app-pokemon-loading></app-pokemon-loading>
+  </span>
+
+  <div class="h-full" *ngIf="!loading">
+    <app-header [buttonName]="'Criar novo baralho'" (buttonAction)="createNewDeck()"></app-header>
+      <app-deck-list [decks]="decks" ></app-deck-list>
+  </div>
+</app-layout>

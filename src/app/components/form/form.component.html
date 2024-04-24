@@ -1,15 +1,44 @@
 <div class="flex flex-col gap-4">
-    <form>
-        <igx-input-group>
-            <input igxInput name="fullName" type="text" required="required" />
-            <label igxLabel for="fullName">Nome do baralho</label>
-        </igx-input-group>
-    </form>
+  <form>
+    <igx-input-group>
+      <input
+        igxInput
+        name="fullName"
+        type="text"
+        required="required"
+        [(ngModel)]="nameDeck"
+        (ngModelChange)="onNameDeckChange()"
+      />
+      <label igxLabel for="fullName">Nome do baralho</label>
+    </igx-input-group>
+    
+  </form>
 
-    <h3 class="text-center">Cartas Adicionadas: 0</h3>
+  <span class="text-center" *ngIf="cardAddList.length > 0">
+    Cartas Adicionadas: {{ cardAddList.length }}
+  </span>
 
-    <button igxButton="contained" igxRipple style="width: 100%">
-        <igx-icon family="material">save</igx-icon> Salvar
-      </button>
-
+  <button
+    igxButton="contained"
+    igxRipple
+    style="width: 100%"
+    (click)="createDeck()"
+    [disabled]="buttonDisabled"
+  >
+    <igx-icon family="material">save</igx-icon> Salvar
+  </button>
 </div>
+
+<igx-dialog
+  #dialogLimit
+  message="O baralho deve conter no mínimo 24 cartas e no máximo 60."
+  leftButtonLabel="OK"
+  (leftButtonSelect)="dialogLimit.close()"
+>
+</igx-dialog>
+<igx-dialog
+  #dialogSuccess
+  message="Baralho criado com sucesso! Carregando lista de baralho ..."
+  leftButtonLabel="OK"
+>
+</igx-dialog>

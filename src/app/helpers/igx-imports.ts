@@ -8,6 +8,7 @@ import {
   IgxPaginatorModule,
   IgxProgressBarModule,
   IgxRippleModule,
+  IgxTooltipModule,
 } from 'igniteui-angular';
 
 export const IGX_MODULES = [
@@ -19,5 +20,6 @@ export const IGX_MODULES = [
   IgxProgressBarModule,
   IgxDialogModule,
 	IgxRippleModule,
-  IgxInputGroupModule
+  IgxInputGroupModule,
+  IgxTooltipModule
 ];

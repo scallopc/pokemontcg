@@ -1,0 +1,52 @@
+.container-decks {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 150px));
+    gap: 25px;
+    justify-items: center;
+    height: 100%;
+    overflow: auto;
+    width: 100%;
+    padding-bottom: 15px;
+    padding-right: 10px;
+    padding: 5px;
+
+    .deck-card {
+        transition: transform 0.3s, box-shadow 0.3s;
+
+        &:hover {
+            box-shadow:
+                -1px -1px #152346,
+                -2px -2px #152346,
+                -3px -3px #152346,
+                -4px -4px #152346,
+                -5px -5px #152346,
+                -6px -6px #152346,
+                -2px -2px #152346;
+            transform: translateX(3px);
+        }
+    }
+
+}
+
+.container-decks-list {
+    display: flex;
+    flex-wrap: wrap;
+    
+    .deck-card {
+        transition: transform 0.3s, box-shadow 0.3s;
+        width: 80px;
+
+        &:hover {
+            box-shadow:
+                -1px -1px #152346,
+                -2px -2px #152346,
+                -3px -3px #152346,
+                -4px -4px #152346,
+                -5px -5px #152346,
+                -6px -6px #152346,
+                -2px -2px #152346;
+            transform: translateX(3px);
+        }
+    }
+
+}

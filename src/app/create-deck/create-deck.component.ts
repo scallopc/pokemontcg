@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PokemonServiceService } from '../services/pokemon-service.service';
+import { PokemonServiceService } from '../shared/services/pokemon-service.service';
+import { IgxDialogComponent } from 'igniteui-angular';
 
 @Component({
   selector: 'app-create-deck',
@@ -7,54 +8,74 @@ import { PokemonServiceService } from '../services/pokemon-service.service';
   styleUrls: ['./create-deck.component.scss'],
 })
 export class CreateDeckComponent implements OnInit {
-  pokemonList: Array<any> = [];
+  cards: Array<any> = [];
+  decks: any[] = [];
   totalCount: number = 0;
   page: number = 1;
+  cardsAdd: Array<any> = [];
   loading: boolean = true;
-  openDetail: boolean = false;
-  itemDetail: any;
+
+  @ViewChild('dialog', { static: true }) dialog: IgxDialogComponent;
+  @ViewChild('dialogAlertLimit', { static: true })
+  dialogAlertLimit: IgxDialogComponent;
 
   constructor(private pokemonService: PokemonServiceService) {}
 
   ngOnInit(): void {
     this.getAllPokemonList(this.page);
+    this.getDecks();
   }
 
   getAllPokemonList(page: number) {
     this.pokemonService.getAll(page).subscribe((res) => {
       this.totalCount = Math.ceil(res.totalCount / res.count);
-      this.pokemonList = res.data;
+      this.cards = res.data;
       this.loading = false;
+    });
+  }
+
+  addCard(card: any) {
+    // Verifique se já existem 4 cartas com o mesmo nome na lista
+    const countSameNameCards = this.cardsAdd.filter(
+      (c) => c.name === card.name
+    ).length;
+
+    if (this.cardsAdd.length >= 60) {
+      // Se o limite de cartas foi atingido, abra o componente Dialog
+      this.dialogAlertLimit.open();
+    } else if (countSameNameCards < 4) {
+      // Se houver menos de 4 cartas com o mesmo nome, adicione o novo cartão
+      this.cardsAdd.push(card);
+    } else {
+      // Se o limite de cartões com o mesmo nome foi atingido, abra o componente Dialog
+      this.dialog.open();
+    }
+  }
+
+  getDecks(): void {
+    this.pokemonService.getDecks().subscribe({
+      next: (data) => {
+        this.decks = data;
+      },
+      error: (error) => {
+        console.error('Erro ao recuperar decks:', error);
+      },
     });
   }
 
   onNextPageChanged() {
     this.loading = true;
-    this.page++;
-    this.pokemonService.getAll(this.page).subscribe((res) => {
-      this.loading = false;
-      this.pokemonList = res.data;
-    });
-  }
-
-  onBeforePageChanged() {
-    if (this.page === 1) {
-    } else {
-      this.loading = true;
-      this.page--;
-      this.pokemonService.getAll(this.page).subscribe((res) => {
-        this.loading = false;
-        this.pokemonList = res.data;
-      });
+    if (this.page < this.totalCount) {
+      this.page++;
+      this.getAllPokemonList(this.page);
     }
   }
 
-  openCardDetail(item: any) {
-    this.itemDetail = item;
-    this.openDetail = true;
-  }
-
-  closeCardDetail() {
-    this.openDetail = false;
+  onBackPageChanged() {
+    this.loading = true;
+    if (this.page > 1) {
+      this.page--;
+      this.getAllPokemonList(this.page);
+    }
   }
 }

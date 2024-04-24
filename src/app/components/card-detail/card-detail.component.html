@@ -2,9 +2,9 @@
   <div class="w-4/12 flex flex-col gap-2 bg-white shadow-md rounded-md p-5">
     <img [src]="cardItem.images.large" />
 
-    <div class="w-full">
-      <button igxButton="contained" igxRipple style="width: 100%">
-        <igx-icon family="material">add</igx-icon> Adicionar
+    <div class="w-full" *ngIf="buttonName !== ''">
+      <button igxButton="contained" igxRipple style="width: 100%" (click)="addCard(cardItem)">
+        <igx-icon family="material">add</igx-icon> {{buttonName}}
       </button>
     </div>
   </div>

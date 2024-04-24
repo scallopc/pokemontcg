@@ -1,58 +1,44 @@
 <app-layout>
-  <span class="flex justify-center items-center" *ngIf="loading">
-    <app-pokemon-loading></app-pokemon-loading>
-  </span>
-
-  <!-- <button igxButton="contained" igxRipple="white" (click)="alert.open()">Show Alert Dialog</button> -->
-  <div class="flex w-full gap-4 overflow-auto" *ngIf="!loading">
-    <div class="flex flex-col gap-3 w-full">
-      <div class="container-card-list">
-        <div *ngFor="let item of pokemonList" class="flex flex-col gap-2">
-          <img
-            [src]="item.images.small"
-            class="cursor-pointer"
-            (click)="openCardDetail(item)"
-          />
-          <div class="w-full">
-            <button igxButton="contained" igxRipple style="width: 100%">
-              <igx-icon family="material">add</igx-icon> Adicionar
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="flex gap-3 w-full">
-        <span>{{ pokemonList.length }} por página</span>
-        <div igxIconButton="outlined" igxRipple class="medium">
-          <igx-icon (click)="onBeforePageChanged()">
-            keyboard_arrow_left
-          </igx-icon>
-        </div>
-        <span>{{page}} de {{totalCount}}</span>
-        <div igxIconButton="outlined" igxRipple class="medium">
-          <igx-icon (click)="onNextPageChanged()">
-            keyboard_arrow_right
-          </igx-icon>
-        </div>
-      </div>
+  <div class="flex gap-4 overflow-hidden w-full h-full" id="Create">
+    <div class="grow">
+      <app-card-list
+        [cards]="cards"
+        [loading]="loading"
+        [totalCount]="totalCount"
+        [page]="page"
+        (addCard)="addCard($event)"
+        (backPage)="onBackPageChanged()"
+        (nextPage)="onNextPageChanged()"
+      ></app-card-list>
     </div>
-    <div class="w-72 flex flex-col gap-2 bg-gray-200 shadow-md rounded-md p-5">
-      <app-form></app-form>
+
+    <div class="w-72 flex flex-col gap-4" *ngIf="!loading">
+      <div class="bg-gray-100 shadow-md rounded-md p-5 h-auto">
+        <app-form [cardAddList]="cardsAdd"></app-form>
+      </div>
+
+      <div class="bg-gray-100 shadow-md rounded-md p-5 h-4/5 overflow-auto">
+        <div *ngIf="decks.length === 0">
+          <span>Você ainda não tem baralhos. Que tal criar um agora?</span>
+        </div>
+        <app-deck-list [home]="false" [decks]="decks"></app-deck-list>
+      </div>
     </div>
   </div>
-
-  <igx-dialog
-    #alert
-    title="Notification"
-    message="Your email has been sent successfully!"
-    leftButtonLabel="OK"
-    (leftButtonSelect)="alert.close()"
-  >
-  </igx-dialog>
 </app-layout>
 
-<app-card-detail
-  [cardItem]="itemDetail"
-  *ngIf="openDetail"
-  [openModalDetail]="openDetail"
-  (closeModalDetailEvent)="closeCardDetail()"
-></app-card-detail>
+<igx-dialog
+  #dialog
+  message="Você atingiu o limite de 4 cartas com o mesmo nome neste baralho."
+  leftButtonLabel="OK"
+  (leftButtonSelect)="dialog.close()"
+>
+</igx-dialog>
+
+<igx-dialog
+  #dialogAlertLimit
+  message="Você atingiu o limite máximo de cartas neste baralho."
+  leftButtonLabel="OK"
+  (leftButtonSelect)="dialogAlertLimit.close()"
+>
+</igx-dialog>

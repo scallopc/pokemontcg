@@ -10,13 +10,17 @@ import { HomeComponent } from './home/home.component';
 import { LayoutComponent } from './shared/layout/layout.component';
 import { ComponentModule } from './components/components.module';
 import { FormsModule } from '@angular/forms';
+import { DecksHomeComponent } from './deck/decks-home/decks-home.component';
+import { DeckDetailComponent } from './deck/deck-detail/deck-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     CreateDeckComponent,
-    LayoutComponent
+    LayoutComponent,
+    DecksHomeComponent,
+    DeckDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -25,8 +29,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     BrowserAnimationsModule,
     ComponentModule,
-    FormsModule
-   
+    FormsModule   
   ],
   providers: [],
   bootstrap: [AppComponent]

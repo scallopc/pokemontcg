@@ -76,4 +76,4 @@ Aqui podemos deletar o baralho e alterar o nome clicando no ícone de edição.
 
 
 Quando tiver 1 ou mais baralhos criados, ele aparece como atalhos na home de criação.
-<img src="./src/assets/screen/homeafter.png" alt=""/>
+<img src="./src/assets/screen/homafter.png" alt=""/>
